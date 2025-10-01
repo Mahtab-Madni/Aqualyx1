@@ -22,7 +22,7 @@ const Index = () => {
             <DataUpload onDataUpload={handleDataUpload} onSectionChange={setActiveSection}/>
             <div className= "chatbot-container">
               <button onClick={() => setIsOpen(!isOpen)} className="chatbot-button">
-                {isOpen ? 'Close Chatbot' : 'Open Chatbot'}
+                {isOpen ? '✖' : '💬'}
               </button>
               {isOpen && (
                 <div className="chatbot-iframe">
@@ -41,7 +41,7 @@ const Index = () => {
             <Results data={uploadedData} />
             <div className= "chatbot-container">
                 <button onClick={() => setIsOpen(!isOpen)} className="chatbot-button">
-                  {isOpen ? 'Close Chatbot' : 'Open Chatbot'}
+                  {isOpen ? '✖' : '💬'}
                 </button>
                 {isOpen && (
                   <div className="chatbot-iframe">
@@ -63,7 +63,7 @@ const Index = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="chatbot-button"
               >
-                {isOpen ? "Close Chatbot" : "Open Chatbot"}
+                {isOpen ? "✖" : "💬"}
               </button>
               {isOpen && (
                 <div className="chatbot-iframe">
@@ -81,7 +81,7 @@ const Index = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="chatbot-button"
               >
-                {isOpen ? "Close Chatbot" : "Open Chatbot"}
+                {isOpen ? "✖" : "💬"}
               </button>
               {isOpen && (
                 <div className="chatbot-iframe">
@@ -135,7 +135,7 @@ const Index = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="chatbot-button"
               >
-                {isOpen ? "Close Chatbot" : "Open Chatbot"}
+                {isOpen ? "✖" : "💬"}
               </button>
               {isOpen && (
                 <div className="chatbot-iframe">
@@ -159,7 +159,7 @@ const Index = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="chatbot-button"
               >
-                {isOpen ? "Close Chatbot" : "Open Chatbot"}
+                {isOpen ? "✖" : "💬"}
               </button>
               {isOpen && (
                 <div className="chatbot-iframe">
