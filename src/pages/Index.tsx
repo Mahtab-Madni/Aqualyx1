@@ -76,24 +76,6 @@ const Index = () => {
                 </div>
               )}
             </div>
-            <div className="chatbot-container">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="chatbot-button"
-              >
-                {isOpen ? "✖" : "💬"}
-              </button>
-              {isOpen && (
-                <div className="chatbot-iframe">
-                  <iframe
-                    src="https://www.chatbase.co/chatbot-iframe/KA56N8LUWvaDb9aw3UIdx"
-                    width="100%"
-                    height="100%"
-                    style = {{minHeight: '650px'}}
-                  ></iframe>
-                </div>
-              )}
-            </div>
           </>
         );
       case 'contact':
