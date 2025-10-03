@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,8 +20,8 @@ const DataUpload = ({ onDataUpload, onSectionChange }: DataUploadProps) => {
   const { toast } = useToast();
 
   const requiredColumns = [
-    'Sample_ID', 'Latitude', 'Longitude', 'Lead', 'Cadmium', 
-    'Arsenic', 'Chromium', 'Mercury', 'Copper'
+    'Location', 'Latitude', 'Longitude', 'F (mg/L)', 'pH', 
+    'NO3 (mg/L)', 'As (ppb)', 'U (ppb)', 'Fe (ppm)','EC (µS/cm at 25 °C)','Total Hardness (mg/L)'
   ];
 
   const sampleData = [
@@ -116,11 +117,11 @@ const DataUpload = ({ onDataUpload, onSectionChange }: DataUploadProps) => {
     const hasValidData = Math.random() > 0.1; // 90% chance of valid data
     
     if (!hasAllColumns) {
-      errors.push('Missing required columns: Lead, Arsenic');
+      errors.push('Missing required columns in the uploaded file.');
     }
     
     if (!hasValidData) {
-      errors.push('Invalid data format in rows 5, 8, 12');
+      errors.push('Data format is invalid.');
     }
 
     setValidationErrors(errors);
@@ -135,25 +136,61 @@ const DataUpload = ({ onDataUpload, onSectionChange }: DataUploadProps) => {
     }
   };
 
-  const handleUseSampleData = () => {
-    setUploadedFile(null);
-    setValidationErrors([]);
-    setIsValidData(true);
-    onDataUpload(sampleData);
+  // const handleUseSampleData = () => {
+  //   setUploadedFile(null);
+  //   setValidationErrors([]);
+  //   setIsValidData(true);
+  //   onDataUpload(sampleData);
     
-    toast({
-      title: "Sample data loaded",
-      description: "Ready to proceed with analysis",
-      variant: "default",
-    });
-  };
+  //   toast({
+  //     title: "Sample data loaded",
+  //     description: "Ready to proceed with analysis",
+  //     variant: "default",
+  //   });
+  // };
 
-  const handleProceedToAnalysis = () => {
-    if (isValidData) {
-      onDataUpload(sampleData); // Use sample data for prototype
-      onSectionChange('results');
+  // const handleProceedToAnalysis = () => {
+  //   if (isValidData) {
+  //     onDataUpload(sampleData); // Use sample data for prototype
+  //     onSectionChange('results');
+  //   }
+  // };
+  const handleProceedToAnalysis = async () => {
+    if (!isValidData || !uploadedFile) return;
+    const formData = new FormData();
+    formData.append("file", uploadedFile); // 'file' must match backend field name
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/upload", {
+        method: "POST",
+        body: formData, // No need to set Content-Type manually
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        toast({
+          title: "Upload successful",
+          description: `${result.count} samples processed`,
+          variant: "default",
+        });
+        onSectionChange("results");
+      } else {
+        toast({
+          title: "Upload failed",
+          description: result.error || "Server error",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Network error",
+        description: "Could not reach the server",
+        variant: "destructive",
+      });
+      console.error("Upload error:", error);
     }
-  };
+};
 
   return (
     <div className="animate-fade-in bg-gray-100 text-gray-900 min-h-screen py-10 px-2 md:px-8">
@@ -220,12 +257,12 @@ const DataUpload = ({ onDataUpload, onSectionChange }: DataUploadProps) => {
                 </div>
 
                 {/* Sample Data Option */}
-                <div className="text-center">
+                {/* <div className="text-center">
                   <p className="text-muted-foreground mb-4 dark:text-gray-400">Or try with sample data</p>
                   <Button variant="official" onClick={handleUseSampleData} className="dark:bg-blue-900 dark:text-white">
                     Use Sample Dataset
                   </Button>
-                </div>
+                </div> */}
 
                 {/* Uploaded File Info */}
                 {uploadedFile && (

@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Dashboard from '@/components/Dashboard';
 import DataUpload from '@/components/DataUpload';
 import Results from '@/components/Results';
+// import SampleReport from '@/components/SampleReportPage';
 import './chatbot.css';
 
 const Index = () => {
@@ -38,7 +39,7 @@ const Index = () => {
       case 'results':
         return (
           <>
-            <Results data={uploadedData} />
+            <Results />
             <div className= "chatbot-container">
                 <button onClick={() => setIsOpen(!isOpen)} className="chatbot-button">
                   {isOpen ? '✖' : '💬'}
@@ -54,10 +55,10 @@ const Index = () => {
               </div>
           </>
         );
-      case 'reports':
+      case 'report':
         return (
           <>
-            <Results data={uploadedData} />
+            <Results />
             <div className="chatbot-container">
               <button
                 onClick={() => setIsOpen(!isOpen)}

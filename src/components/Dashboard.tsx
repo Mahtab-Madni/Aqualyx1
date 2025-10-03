@@ -35,7 +35,7 @@ const Dashboard = ({ onSectionChange }: DashboardProps) => {
   return (
     <div className="space-y-8 animate-fade-in bg-gray-100">
       {/* Hero Section */}
-      {/* <div className="relative overflow-hidden rounded-xl bg-gradient-hero shadow-elevated dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 transition-transform duration-300 hover:scale-105 hover:z-10">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-hero shadow-elevated dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 transition-transform duration-300 hover:scale-105 hover:z-10">
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
@@ -73,7 +73,7 @@ const Dashboard = ({ onSectionChange }: DashboardProps) => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
